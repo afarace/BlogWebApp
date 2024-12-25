@@ -17,6 +17,10 @@ app.get("/create", (req, res) => {
   res.render("create.ejs");
 });
 
+app.get("/view", (req, res) => {
+  res.render("view.ejs", { blogs });
+});
+
 app.post("/create", (req, res) => {
   const date = new Date().toDateString();
   blogs.push({
