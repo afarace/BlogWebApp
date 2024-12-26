@@ -46,6 +46,22 @@ app.get("/delete/:id", (req, res) => {
   res.redirect("/view");
 });
 
+app.get("/edit/:id", (req, res) => {
+  const blog = blogs.find(item => item.id === parseInt(req.params.id));
+  res.render("edit.ejs", { blog });
+});
+
+app.post("/edit/:id", (req, res) => {
+  const blogId = parseInt(req.params.id);
+  const blogIndex = blogs.findIndex(item => item.id === blogId);
+  if (blogIndex !== -1) {
+    blogs[blogIndex].author = req.body["author"];
+    blogs[blogIndex].title = req.body["title"];
+    blogs[blogIndex].body = req.body["body"];
+  }
+  res.redirect("/view");
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
