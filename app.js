@@ -37,6 +37,13 @@ app.post("/create", (req, res) => {
     body: req.body["body"],
   });
   blogID++
+  res.redirect("/view");
+});
+
+app.get("/delete/:id", (req, res) => {
+  const index = blogs.findIndex(item => item.id === parseInt(req.params.id));
+  blogs.splice(index, 1);
+  res.redirect("/view");
 });
 
 app.listen(port, () => {
